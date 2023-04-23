@@ -1,0 +1,36 @@
+<%- include('partials/header.ejs'); %>
+
+<body>
+
+    <%- include('partials/navbar.ejs'); %>
+
+    <div class="container">
+        <h1 class="text-center">Pessoas</h1>
+        <hr>
+        <a role="button" class="btn btn-primary" href="/cadastrar-pessoa">Nova Pessoa</a>
+
+        <% pessoas.forEach(pessoa => { %>
+
+            <div class="card mt-2">
+
+                <div class="card-body">
+                    <h3>Nome: <%= pessoa.nome %></h3>
+                    <h4>Email: <%= pessoa.email %></h4>
+                    <p>Função: <%= pessoa.funcao%></p>
+                </div>
+
+                <div class="card-footer">
+                    <a role="button" href="/tarefa/<%=pessoa.id%>" class="btn btn-info float-right">Tarefa</a>
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</body>
+
+<%- include('partials/footer.ejs'); %> 
+
+
