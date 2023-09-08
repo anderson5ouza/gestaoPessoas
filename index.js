@@ -1,9 +1,27 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
 const PessoasModel = require('./database/Pessoas');
 const TarefasModel = require('./database/Tarefas');
+
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(express.static('uploads'));
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+app.use(
+    fileUpload({
+        limits: {
+            fileSize: 10000000
+        },
+        abortOnLimit: true
+    })
+);
+
 
 connection.authenticate()
     .then(() => {
@@ -12,12 +30,6 @@ connection.authenticate()
     .catch((error) => {
         console.log(error);
     });
-
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
-
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
 
@@ -44,10 +56,18 @@ app.post('/salvar-pessoa', (req, res) => {
     email  = req.body.email;
     funcao = req.body.funcao;
 
+    //console.log(req.files);
+
+    const { image } = req.files;
+
+   if(image)
+        image.mv(__dirname + '/uploads/' + image.name);
+
     PessoasModel.create({
         nome: nome,
         email: email,
-        funcao: funcao
+        funcao: funcao,
+        image: image.name
     }).then(() => {
         res.redirect('/');
     });

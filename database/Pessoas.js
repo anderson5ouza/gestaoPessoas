@@ -14,7 +14,11 @@ const Pessoas = connection.define('pessoas', {
     funcao: {
         type: Sequelize.TEXT,
         allowNull: false
-    }    
+    }, 
+    image: {
+        type: Sequelize.STRING,
+        allowNull: true
+    }   
 });
 
 Pessoas.sync({force: false});

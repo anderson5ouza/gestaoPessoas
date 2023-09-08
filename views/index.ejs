@@ -14,9 +14,18 @@
             <div class="card mt-2">
 
                 <div class="card-body">
-                    <h3>Nome: <%= pessoa.nome %></h3>
-                    <h4>Email: <%= pessoa.email %></h4>
-                    <p>Função: <%= pessoa.funcao%></p>
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+                        <% if(pessoa.image){ %>
+                            <img src="<%=pessoa.image%>" class="img-fluid" />
+                        <% }else{ %>
+                            <img src="http://via.placeholder.com/300x300?text=Sem foto" />
+                        <% } %>
+                        </div>
+                    </div>
+                    <h3 class="text-center">Nome: <%= pessoa.nome %></h3>
+                    <h4 class="text-center">Email: <%= pessoa.email %></h4>
+                    <p class="text-center pl-3 pr-3">Função: <%= pessoa.funcao%></p>
                 </div>
 
                 <div class="card-footer">

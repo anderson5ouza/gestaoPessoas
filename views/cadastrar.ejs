@@ -14,11 +14,13 @@
 
         <div class="card-body">
 
-            <form method="post" action="/salvar-pessoa">
+            <form method="post" action="/salvar-pessoa" enctype="multipart/form-data">
                 <label>Nome completo</label>
                 <input type="text" class="form-control mb-2" name="nome" placeholder="Informe o nome completo">
                 <label>Email</label>
                 <input type="email" class="form-control mb-2" name="email" placeholder="Informe o email">
+                <label>Foto</label><br>
+                <input type="file" name="image" /><br><br>
                 <label>Descrição da função</label>
                 <textarea class="form-control mb-2" name="funcao" placeholder="Descreva a função da pessoa"></textarea>
                 <button class="btn btn-primary mt-2">Cadastrar</button>
